@@ -103,7 +103,9 @@ namespace WebbShopFront
                         ListAllUsers();
                         break;
                     case "4":
+                        Console.WriteLine("Test");
                         break;
+                        
 
 
                     
