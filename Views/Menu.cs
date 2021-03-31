@@ -27,11 +27,13 @@ namespace WebbShopFront
             {
                 Console.Clear();
                 Console.WriteLine(@"
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
                                    _      __    __   __   ______
                                   | | /| / /__ / /  / /  / __/ /  ___  ___
                                   | |/ |/ / -_) _ \/ _ \_\ \/ _ \/ _ \/ _ \
                                   |__/|__/\__/_.__/_.__/___/_//_/\___/ .__/
-                                                          /_/
+                                                                    /_/
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
                                             (1) Logga in
                                             (2) Exit
@@ -78,16 +80,22 @@ namespace WebbShopFront
             {
                 Console.Clear();
                 Console.WriteLine(@"
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
                                      ___     __      _
                                     / _ |___/ /_ _  (_)__  __ _  ___ ___  __ __
                                    / __ / _  /  ' \/ / _ \/  ' \/ -_) _ \/ // /
                                   /_/ |_\_,_/_/_/_/_/_//_/_/_/_/\__/_//_/\_,_/
 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
                               ");
                 Console.WriteLine(spacing + "(1) Add a book");
                 Console.WriteLine(spacing + "(2) Add amount of books");
                 Console.WriteLine(spacing + "(3) List all users");
-                Console.WriteLine(spacing + "(4) Search for a user\n");
+                Console.WriteLine(spacing + "(4) Search for a user");
+                Console.WriteLine(spacing + "(5) Update a book");
+                Console.WriteLine(spacing + "(6) Delete a book");
+                Console.WriteLine(spacing + "(7) Add a category");
                 Console.Write(spacing + "      ");
                 string input = Console.ReadLine();
 
@@ -103,9 +111,19 @@ namespace WebbShopFront
                         ListAllUsers();
                         break;
                     case "4":
-                        Console.WriteLine("Test");
+                        SearchUser();
                         break;
-                        
+                    case "5":
+                        UpdateBook();
+                        break;
+                    case "6":
+                        DeleteBook();
+                        break;
+                    case "7":
+                        AddCategory();
+                        break;
+                    case "8"
+
 
 
                     
@@ -113,8 +131,111 @@ namespace WebbShopFront
             }
         }
 
+
+
+        public void AddCategory()
+        {
+            var API = new WebbShopAPI.WebbShopAPI();
+            Console.Write(spacing + "Admin ID: ");
+            string adminInput = Console.ReadLine();
+            Console.Write(spacing + "Category name: ");
+            string categoryInput = Console.ReadLine();
+
+            int adminID = Convert.ToInt32(adminInput);
+
+            var addCategory = API.AddCategory(adminID, categoryInput);
+
+            if (addCategory == true)
+            {
+                Console.WriteLine(spacing + $"Added category.");
+                Console.Write(spacing);
+                Console.ReadLine();
+            }
+            else if (addCategory == false)
+            {
+                Console.WriteLine("Failed to add category.");
+                Console.Write(spacing);
+                Console.ReadLine();
+            }
+        }
+
+        public void DeleteBook()
+        {
+            var API = new WebbShopAPI.WebbShopAPI();
+            Console.Write(spacing + "Admin ID: ");
+            string adminInput = Console.ReadLine();
+            Console.Write(spacing + "Book ID: ");
+            string bookInput = Console.ReadLine();
+
+            int adminID = Convert.ToInt32(adminInput);
+            int bookID = Convert.ToInt32(bookInput);
+
+            var deleteBook = API.DeleteBook(adminID, bookID);
+
+            if (deleteBook == true)
+            {
+                Console.WriteLine(spacing + $"Deleted the book.");
+                Console.Write(spacing);
+                Console.ReadLine();
+            }
+            else if (deleteBook == false)
+            {
+                Console.WriteLine("Failed to delete book.");
+                Console.Write(spacing);
+                Console.ReadLine();
+            }
+        }
+
+        public void UpdateBook()
+        {
+            var API = new WebbShopAPI.WebbShopAPI();
+            Console.Write(spacing + "Admin ID: ");
+            string adminInput = Console.ReadLine();
+            Console.Write(spacing + "Book ID: ");
+            string bookInput = Console.ReadLine();
+            Console.Write(spacing + "Title: ");
+            string titleInput = Console.ReadLine();
+            Console.Write(spacing + "Author: ");
+            string authorInput = Console.ReadLine();
+            Console.Write(spacing + "Price: ");
+            string priceInput = Console.ReadLine();
+
+            int adminID = Convert.ToInt32(adminInput);
+            int bookID = Convert.ToInt32(bookInput);
+            int price = Convert.ToInt32(priceInput);
+
+            var updateBook = API.UpdateBook(adminID, bookID, titleInput, authorInput, price);
+
+            if (updateBook == true)
+            {
+                Console.WriteLine(spacing + $"Updated the changes.");
+                Console.Write(spacing);
+                Console.ReadLine();
+            }
+            else if (updateBook == false)
+            {
+                Console.WriteLine("Failed to update book.");
+                Console.Write(spacing);
+                Console.ReadLine();
+            }
+        }
+
         public void SearchUser()
         {
+            var API = new WebbShopAPI.WebbShopAPI();
+            Console.Write(spacing + "Admin ID: ");
+            string adminInput = Console.ReadLine();
+            Console.Write(spacing + "Username: ");
+            string userInput = Console.ReadLine();
+
+            int adminID = Convert.ToInt32(adminInput);
+
+            var userList = API.FindUser(adminID, userInput);
+            foreach (var user in userList)
+            {
+                Console.WriteLine(spacing + user.Name);
+            }
+            Console.ReadLine();
 
         }
 
