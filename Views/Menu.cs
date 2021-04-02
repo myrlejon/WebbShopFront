@@ -30,8 +30,9 @@ namespace WebbShopFront
                                                                     /_/
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-                                            (1) Logga in
-                                            (2) Exit
+                                            (1) Log in
+                                            (2) Register
+                                            (3) Exit
 
                                   ");
                 Console.Write(spacing + "    ");
@@ -60,6 +61,26 @@ namespace WebbShopFront
                     }
                 }
                 else if (input == "2")
+                {
+                    Console.Write(spacing + "Username: ");
+                    string username = Console.ReadLine();
+                    Console.Write(spacing + "Password: ");
+                    string password = Console.ReadLine();
+                    Console.Write(spacing + "Verify password: ");
+                    string passwordverify = Console.ReadLine();
+
+                    var register = API.Register(username, password, passwordverify);
+                    if (register == true)
+                    {
+                        Console.WriteLine(spacing + "Created new account.");
+                    }
+                    else if (register == false)
+                    {
+                        Console.WriteLine(spacing + "Failed to create an account.");
+                    }
+                    Console.ReadLine();
+                }
+                else if (input == "3")
                 {
                     System.Environment.Exit(1);
                 }
@@ -157,6 +178,9 @@ namespace WebbShopFront
             }
         }
 
+        /// <summary>
+        /// Meny för alla användare som har IsAdmin = false (default). Menyn innehåller olika menyalternativ som hä
+        /// </summary>
         public void UserMenu()
         {
             bool adminMenu = true;
@@ -175,10 +199,10 @@ namespace WebbShopFront
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
                                     ");
-                Console.WriteLine(spacing2 + "(1) List all categories\t(6) ");
-                Console.WriteLine(spacing2 + "(2) Search for category by name");
-                Console.WriteLine(spacing2 + "(3) Search books that match category ID");
-                Console.WriteLine(spacing2 + "(4) Get avaible books");
+                Console.WriteLine(spacing2 + "(1) List all categories\t\t\t(6) Search for book by name");
+                Console.WriteLine(spacing2 + "(2) Search for category by name\t\t(7) Search for author by name");
+                Console.WriteLine(spacing2 + "(3) Search books that match category ID\t(8) Buy a book");
+                Console.WriteLine(spacing2 + "(4) Get available books\t\t\t(9) Logout");
                 Console.WriteLine(spacing2 + "(5) Search for a book with ID");
                 Console.Write(spacing + "      ");
                 string input = Console.ReadLine();
@@ -201,7 +225,17 @@ namespace WebbShopFront
                         user.GetBook();
                         break;
                     case "6":
-
+                        user.GetBooks();
+                        break;
+                    case "7":
+                        user.GetAuthors();
+                        break;
+                    case "8":
+                        user.BuyBook();
+                        break;
+                    case "9":
+                        user.Logout();
+                        break;
 
                 }
             }

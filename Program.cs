@@ -10,8 +10,6 @@ namespace WebbShopFront
     {
         static void Main(string[] args)
         {
-            var API = new WebbShopAPI.WebbShopAPI();
-            var seeder = new Seeder();
             var menu = new Menu();
 
             Seeder.Seed();

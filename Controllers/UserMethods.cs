@@ -6,6 +6,9 @@ namespace WebbShopFront.Controllers
 {
     class UserMethods
     {
+        /// <summary>
+        /// Dessa två strängar har jag skapat för att göra det smidigare med att designa menyerna.
+        /// </summary>
         public string spacing = "                                            ";
         public string spacing2 = "           ";
         public void Logout()
@@ -13,24 +16,23 @@ namespace WebbShopFront.Controllers
             var menu = new WebbShopFront.Menu();
             var API = new WebbShopAPI.WebbShopAPI();
 
-            Console.Write(spacing + "Admin ID: ");
-            string adminInput = Console.ReadLine();
+            Console.Write(spacing + "ID: ");
+            string userInput = Console.ReadLine();
 
-            int adminID = Convert.ToInt32(adminInput);
+            int userID = Convert.ToInt32(userInput);
 
-            var logout = API.Logout(adminID);
+            var logout = API.Logout(userID);
 
             if (logout == true)
             {
                 Console.WriteLine(spacing + "Logged out, you will return to main menu.");
-                Console.ReadLine();
                 menu.Intro();
             }
             else if (logout == false)
             {
                 Console.WriteLine(spacing + "Wrong ID.");
-                Console.ReadLine();
             }
+            Console.ReadLine();
         }
 
         public void ListCategories()
@@ -100,12 +102,63 @@ namespace WebbShopFront.Controllers
 
             var book = API.GetBook(ID);
 
-            Console.WriteLine(book);
+            Console.WriteLine(spacing +  book.Title);
             Console.ReadLine();
         }
 
-        //TODO: 4 metoder kvar.
+        public void GetBooks()
+        {
+            Console.Write(spacing + "Name: ");
+            string input = Console.ReadLine();
+            var API = new WebbShopAPI.WebbShopAPI();
 
+            var bookList = API.GetBooks(input);
+
+            foreach (var book in bookList)
+            {
+                Console.WriteLine(spacing + book.Title);
+            }
+            Console.ReadLine();
+        }
+
+        public void GetAuthors()
+        {
+            Console.Write(spacing + "Name: ");
+            string input = Console.ReadLine();
+            var API = new WebbShopAPI.WebbShopAPI();
+
+            var authorList = API.GetBooks(input);
+
+            foreach (var book in authorList)
+            {
+                Console.WriteLine(spacing + book.Author);
+            }
+            Console.ReadLine();
+        }
+
+        public void BuyBook()
+        {
+            var API = new WebbShopAPI.WebbShopAPI();
+
+            Console.Write(spacing + "User ID: ");
+            string userID = Console.ReadLine();
+            Console.Write(spacing + "Book ID: ");
+            string bookID = Console.ReadLine();
+            int user = Convert.ToInt32(userID);
+            int book = Convert.ToInt32(bookID);
+
+            var buyBook = API.BuyBook(user, book);
+
+            if (buyBook == true)
+            {
+                Console.WriteLine(spacing + "Bought book.");
+            }
+            else if (buyBook == false)
+            {
+                Console.WriteLine(spacing + "Failed to buy book.");
+            }
+            Console.ReadLine();
+        }
 
     }
 }
