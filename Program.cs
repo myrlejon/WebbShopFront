@@ -20,6 +20,10 @@ namespace WebbShopFront
             {
                 menu.AdminMenu();
             }
+            else if (isAdmin == false)
+            {
+                menu.UserMenu();
+            }
             
         }
     }

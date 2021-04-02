@@ -6,10 +6,7 @@ namespace WebbShopFront
     public class Menu
     {
         public string spacing = "                                            ";
-        public int X = 0;
-        public int Y = 0;
-        public int MaxWidth { get; set; } = 120;
-
+        public string spacing2 = "           ";
         public bool Intro()
         {
             bool adminUser = false;
@@ -19,8 +16,6 @@ namespace WebbShopFront
             Console.WindowWidth = 120;
             Console.BackgroundColor = ConsoleColor.Cyan;
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
-
-            SetPos(0, 0);
 
             bool loop = true;
             while (loop)
@@ -76,6 +71,9 @@ namespace WebbShopFront
         {
             bool adminMenu = true;
             var API = new WebbShopAPI.WebbShopAPI();
+            var admin = new Controllers.AdminMethods();
+            var user = new Controllers.UserMethods();
+
             while (adminMenu)
             {
                 Console.Clear();
@@ -89,258 +87,124 @@ namespace WebbShopFront
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
                               ");
-                Console.WriteLine(spacing + "(1) Add a book");
-                Console.WriteLine(spacing + "(2) Add amount of books");
-                Console.WriteLine(spacing + "(3) List all users");
-                Console.WriteLine(spacing + "(4) Search for a user");
-                Console.WriteLine(spacing + "(5) Update a book");
-                Console.WriteLine(spacing + "(6) Delete a book");
-                Console.WriteLine(spacing + "(7) Add a category");
+                Console.WriteLine(spacing2 + "(1) Add a book\t\t(8) Add a book to category\t(15) Demote a user");
+                Console.WriteLine(spacing2 + "(2) Add amount of books\t(9) Delete a category\t\t(16) Activate a user");
+                Console.WriteLine(spacing2 + "(3) List all users\t\t(10) Add a user\t\t\t(17) Inactivate a user");
+                Console.WriteLine(spacing2 + "(4) Search for a user\t(11) View all sold items\t(18) Logout");
+                Console.WriteLine(spacing2 + "(5) Update a book\t\t(12) Show all money earned");
+                Console.WriteLine(spacing2 + "(6) Delete a book\t\t(13) Display the best customer");
+                Console.WriteLine(spacing2 + "(7) Add a category\t\t(14) Promote a user\n");
                 Console.Write(spacing + "      ");
                 string input = Console.ReadLine();
 
                 switch (input)
                 {
                     case "1":
-                        AddBook();
+                        admin.AddBook();
                         break;
                     case "2":
-                        SetAmount();
+                        admin.SetAmount();
                         break;
                     case "3":
-                        ListAllUsers();
+                        admin.ListAllUsers();
                         break;
                     case "4":
-                        SearchUser();
+                        admin.SearchUser();
                         break;
                     case "5":
-                        UpdateBook();
+                        admin.UpdateBook();
                         break;
                     case "6":
-                        DeleteBook();
+                        admin.DeleteBook();
                         break;
                     case "7":
-                        AddCategory();
+                        admin.AddCategory();
                         break;
-                    case "8"
-
-
-
-                    
+                    case "8":
+                        admin.AddBookToCategory();
+                        break;
+                    case "9":
+                        admin.DeleteCategory();
+                        break;
+                    case "10":
+                        admin.AddUser();
+                        break;
+                    case "11":
+                        admin.SoldItems();
+                        break;
+                    case "12":
+                        admin.MoneyEarned();
+                        break;
+                    case "13":
+                        admin.BestCustomer();
+                        break;
+                    case "14":
+                        admin.Promote();
+                        break;
+                    case "15":
+                        admin.Demote();
+                        break;
+                    case "16":
+                        admin.ActivateUser();
+                        break;
+                    case "17":
+                        admin.InactivateUser();
+                        break;
+                    case "18":
+                        user.Logout();
+                        break;
                 }
             }
         }
 
-
-
-        public void AddCategory()
+        public void UserMenu()
         {
+            bool adminMenu = true;
             var API = new WebbShopAPI.WebbShopAPI();
-            Console.Write(spacing + "Admin ID: ");
-            string adminInput = Console.ReadLine();
-            Console.Write(spacing + "Category name: ");
-            string categoryInput = Console.ReadLine();
-
-            int adminID = Convert.ToInt32(adminInput);
-
-            var addCategory = API.AddCategory(adminID, categoryInput);
-
-            if (addCategory == true)
+            var user = new Controllers.UserMethods();
+            while (adminMenu)
             {
-                Console.WriteLine(spacing + $"Added category.");
-                Console.Write(spacing);
-                Console.ReadLine();
+                Console.Clear();
+                Console.WriteLine(@"
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                    __  __                                         
+                                   / / / /_______  _________ ___  ___  ____  __  __
+                                  / / / / ___/ _ \/ ___/ __ `__ \/ _ \/ __ \/ / / /
+                                 / /_/ (__  )  __/ /  / / / / / /  __/ / / / /_/ / 
+                                 \____/____/\___/_/  /_/ /_/ /_/\___/_/ /_/\__,_/  
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                    ");
+                Console.WriteLine(spacing2 + "(1) List all categories\t(6) ");
+                Console.WriteLine(spacing2 + "(2) Search for category by name");
+                Console.WriteLine(spacing2 + "(3) Search books that match category ID");
+                Console.WriteLine(spacing2 + "(4) Get avaible books");
+                Console.WriteLine(spacing2 + "(5) Search for a book with ID");
+                Console.Write(spacing + "      ");
+                string input = Console.ReadLine();
+
+                switch (input)
+                {
+                    case "1":
+                        user.ListCategories();
+                        break;
+                    case "2":
+                        user.ListCategoryKeyword();
+                        break;
+                    case "3":
+                        user.ListCategoryID();
+                        break;
+                    case "4":
+                        user.GetAvaibleBooks();
+                        break;
+                    case "5":
+                        user.GetBook();
+                        break;
+                    case "6":
+
+
+                }
             }
-            else if (addCategory == false)
-            {
-                Console.WriteLine("Failed to add category.");
-                Console.Write(spacing);
-                Console.ReadLine();
-            }
-        }
-
-        public void DeleteBook()
-        {
-            var API = new WebbShopAPI.WebbShopAPI();
-            Console.Write(spacing + "Admin ID: ");
-            string adminInput = Console.ReadLine();
-            Console.Write(spacing + "Book ID: ");
-            string bookInput = Console.ReadLine();
-
-            int adminID = Convert.ToInt32(adminInput);
-            int bookID = Convert.ToInt32(bookInput);
-
-            var deleteBook = API.DeleteBook(adminID, bookID);
-
-            if (deleteBook == true)
-            {
-                Console.WriteLine(spacing + $"Deleted the book.");
-                Console.Write(spacing);
-                Console.ReadLine();
-            }
-            else if (deleteBook == false)
-            {
-                Console.WriteLine("Failed to delete book.");
-                Console.Write(spacing);
-                Console.ReadLine();
-            }
-        }
-
-        public void UpdateBook()
-        {
-            var API = new WebbShopAPI.WebbShopAPI();
-            Console.Write(spacing + "Admin ID: ");
-            string adminInput = Console.ReadLine();
-            Console.Write(spacing + "Book ID: ");
-            string bookInput = Console.ReadLine();
-            Console.Write(spacing + "Title: ");
-            string titleInput = Console.ReadLine();
-            Console.Write(spacing + "Author: ");
-            string authorInput = Console.ReadLine();
-            Console.Write(spacing + "Price: ");
-            string priceInput = Console.ReadLine();
-
-            int adminID = Convert.ToInt32(adminInput);
-            int bookID = Convert.ToInt32(bookInput);
-            int price = Convert.ToInt32(priceInput);
-
-            var updateBook = API.UpdateBook(adminID, bookID, titleInput, authorInput, price);
-
-            if (updateBook == true)
-            {
-                Console.WriteLine(spacing + $"Updated the changes.");
-                Console.Write(spacing);
-                Console.ReadLine();
-            }
-            else if (updateBook == false)
-            {
-                Console.WriteLine("Failed to update book.");
-                Console.Write(spacing);
-                Console.ReadLine();
-            }
-        }
-
-        public void SearchUser()
-        {
-            var API = new WebbShopAPI.WebbShopAPI();
-            Console.Write(spacing + "Admin ID: ");
-            string adminInput = Console.ReadLine();
-            Console.Write(spacing + "Username: ");
-            string userInput = Console.ReadLine();
-
-            int adminID = Convert.ToInt32(adminInput);
-
-            var userList = API.FindUser(adminID, userInput);
-            foreach (var user in userList)
-            {
-                Console.WriteLine(spacing + user.Name);
-            }
-            Console.ReadLine();
-
-        }
-
-        public void ListAllUsers()
-        {
-            var API = new WebbShopAPI.WebbShopAPI();
-            Console.Write(spacing + "Admin ID: ");
-            string adminInput = Console.ReadLine();
-
-            int adminID = Convert.ToInt32(adminInput);
-
-            var listAll = API.ListUsers(adminID);
-
-            Console.WriteLine("\n" + spacing + "~ Users ~\n");
-            foreach (var user in listAll)
-            {
-                Console.WriteLine(spacing + user.Name);
-            }
-            Console.ReadLine();
-        }
-
-        public void SetAmount()
-        {
-            var API = new WebbShopAPI.WebbShopAPI();
-
-            Console.Write(spacing + "Admin ID: ");
-            string adminInput = Console.ReadLine();
-            Console.Write(spacing + "Book ID: ");
-            string bookInput = Console.ReadLine();
-            Console.Write(spacing + "Amount: ");
-            string amountInput = Console.ReadLine();
-
-            int adminID = Convert.ToInt32(adminInput);
-            int bookID = Convert.ToInt32(bookInput);
-            int amount = Convert.ToInt32(amountInput);
-
-            var setAmount = API.SetAmount(adminID, bookID, amount);
-
-            if (setAmount == true)
-            {
-                Console.WriteLine(spacing + $"Added amount by {amount}");
-                Console.Write(spacing);
-                Console.ReadLine();
-            }
-            else if (setAmount == false)
-            {
-                Console.WriteLine("Failed to add book.");
-                Console.Write(spacing);
-                Console.ReadLine();
-            }
-        }
-
-        public void AddBook()
-        {
-            var API = new WebbShopAPI.WebbShopAPI();
-
-            Console.Write(spacing + "Admin ID: ");
-            string adminInput = Console.ReadLine();
-            Console.Write(spacing + "Book ID: ");
-            string bookInput = Console.ReadLine();
-            Console.Write(spacing + "Title: ");
-            string title = Console.ReadLine();
-            Console.Write(spacing + "Author: ");
-            string author = Console.ReadLine();
-            Console.Write(spacing + "Price: ");
-            string priceInput = Console.ReadLine();
-            Console.Write(spacing + "Amount: ");
-            string amountInput = Console.ReadLine();
-
-            int adminID = Convert.ToInt32(adminInput);
-            int bookID = Convert.ToInt32(bookInput);
-            int price = Convert.ToInt32(priceInput);
-            int amount = Convert.ToInt32(amountInput);
-
-            var bookAdd = API.AddBook(adminID, bookID, title, author, price, amount);
-
-            if (bookAdd == true)
-            {
-                Console.WriteLine(spacing + $"Added {title}.");
-                Console.Write(spacing);
-                Console.ReadLine();
-            }
-            else if (bookAdd == false)
-            {
-                Console.WriteLine("Failed to add book.");
-                Console.Write(spacing);
-                Console.ReadLine();
-            }
-        }
-
-        public void SetPos(int x = -1, int y = -1)
-        {
-            if (x < 0)
-            {
-                x = X;
-            }
-
-            if (y < 0)
-            {
-                y = Y;
-            }
-
-            Console.SetCursorPosition(x, y);
-            X = x;
-            Y = y;
         }
     }
 }
