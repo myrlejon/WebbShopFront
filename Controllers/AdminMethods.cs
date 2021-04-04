@@ -6,8 +6,15 @@ namespace WebbShopFront.Controllers
 {
     class AdminMethods
     {
+        /// <summary>
+        /// Dessa två strängar har jag skapat för att göra det smidigare med att designa menyerna.
+        /// </summary>
         public string spacing = "                                            ";
         public string spacing2 = "           ";
+
+        /// <summary>
+        /// Denna metod lägger till ny bok i systemet. Ifall boken redan existerar, så kommer bokens amount att öka med angiven parameter.
+        /// </summary>
         public void AddBook()
         {
             var API = new WebbShopAPI.WebbShopAPI();
@@ -46,6 +53,9 @@ namespace WebbShopFront.Controllers
             }
         }
 
+        /// <summary>
+        /// Denna metod bestämmer hur många böcker som ska finnas i bokaffären.
+        /// </summary>
         public void SetAmount()
         {
             var API = new WebbShopAPI.WebbShopAPI();
@@ -77,6 +87,9 @@ namespace WebbShopFront.Controllers
             }
         }
 
+        /// <summary>
+        /// Denna metod listar upp alla användare.
+        /// </summary>
         public void ListAllUsers()
         {
             var API = new WebbShopAPI.WebbShopAPI();
@@ -96,6 +109,9 @@ namespace WebbShopFront.Controllers
             Console.ReadLine();
         }
 
+        /// <summary>
+        /// Denna metod söker efter en användare med hjälp av sökordsparameter.
+        /// </summary>
         public void SearchUser()
         {
             var API = new WebbShopAPI.WebbShopAPI();
@@ -115,6 +131,9 @@ namespace WebbShopFront.Controllers
             Console.ReadLine();
         }
 
+        /// <summary>
+        /// Denna metod uppdaterar värden hos en redan existerande bok.
+        /// </summary>
         public void UpdateBook()
         {
             var API = new WebbShopAPI.WebbShopAPI();
@@ -150,6 +169,9 @@ namespace WebbShopFront.Controllers
             }
         }
 
+        /// <summary>
+        /// Denna metod raderar en bok med hjälp av ID.
+        /// </summary>
         public void DeleteBook()
         {
             var API = new WebbShopAPI.WebbShopAPI();
@@ -178,6 +200,9 @@ namespace WebbShopFront.Controllers
             }
         }
 
+        /// <summary>
+        /// Denna metod lägger till en kategori.
+        /// </summary>
         public void AddCategory()
         {
             var API = new WebbShopAPI.WebbShopAPI();
@@ -205,6 +230,9 @@ namespace WebbShopFront.Controllers
             }
         }
 
+        /// <summary>
+        /// Denna metod lägger till en redan existerande bok till en kategori.
+        /// </summary>
         public void AddBookToCategory()
         {
             var API = new WebbShopAPI.WebbShopAPI();
@@ -235,6 +263,9 @@ namespace WebbShopFront.Controllers
             }
         }
 
+        /// <summary>
+        /// Denna metod raderar en kategori.
+        /// </summary>
         public void DeleteCategory()
         {
             var API = new WebbShopAPI.WebbShopAPI();
@@ -263,6 +294,9 @@ namespace WebbShopFront.Controllers
             }
         }
 
+        /// <summary>
+        /// Denna metod lägger till en användare.
+        /// </summary>
         public void AddUser()
         {
             var API = new WebbShopAPI.WebbShopAPI();
@@ -293,6 +327,9 @@ namespace WebbShopFront.Controllers
 
         }
 
+        /// <summary>
+        /// Denna metod radar upp alla böcker som har sålts till vilken person.
+        /// </summary>
         public void SoldItems()
         {
             var API = new WebbShopAPI.WebbShopAPI();
@@ -310,6 +347,9 @@ namespace WebbShopFront.Controllers
             }
         }
 
+        /// <summary>
+        /// Denna metod visar hur mycket pengar bokaffären har tjänat.
+        /// </summary>
         public void MoneyEarned()
         {
             var API = new WebbShopAPI.WebbShopAPI();
@@ -323,6 +363,9 @@ namespace WebbShopFront.Controllers
             Console.WriteLine(spacing + moneyEarned + "kr");
         }
 
+        /// <summary>
+        /// Denna metod hämtar den bästa kunden i bokaffären.
+        /// </summary>
         public void BestCustomer()
         {
             var API = new WebbShopAPI.WebbShopAPI();
@@ -337,6 +380,9 @@ namespace WebbShopFront.Controllers
             Console.ReadLine();
         }
 
+        /// <summary>
+        /// Denna metod ställer in så att en vanlig användare uppgraderas till adminstatus (IsAdmin = true);
+        /// </summary>
         public void Promote()
         {
             var API = new WebbShopAPI.WebbShopAPI();
@@ -365,6 +411,9 @@ namespace WebbShopFront.Controllers
             }
         }
 
+        /// <summary>
+        /// Denna metoden nedgraderar en användare ifrån adminstatus till vanlig user (IsAdmin = false)
+        /// </summary>
         public void Demote()
         {
             var API = new WebbShopAPI.WebbShopAPI();
@@ -393,6 +442,9 @@ namespace WebbShopFront.Controllers
             }
         }
 
+        /// <summary>
+        /// Denna metod aktiverar en avstängd/inaktiv användare.
+        /// </summary>
         public void ActivateUser()
         {
             var API = new WebbShopAPI.WebbShopAPI();
@@ -421,6 +473,9 @@ namespace WebbShopFront.Controllers
             }
         }
 
+        /// <summary>
+        /// Denna metoden inaktiverar en användare.
+        /// </summary>
         public void InactivateUser()
         {
             var API = new WebbShopAPI.WebbShopAPI();

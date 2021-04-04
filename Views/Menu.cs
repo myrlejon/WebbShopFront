@@ -5,8 +5,16 @@ namespace WebbShopFront
 {
     public class Menu
     {
+        /// <summary>
+        /// Dessa två strängar har jag skapat för att göra det smidigare med att designa menyerna.
+        /// </summary>
         public string spacing = "                                            ";
         public string spacing2 = "           ";
+        
+        /// <summary>
+        /// Denna metod körs när programmet startas, metoden returnerar true eller false beroende på vad IsAdmin är satt till.
+        /// </summary>
+        /// <returns></returns>
         public bool Intro()
         {
             bool adminUser = false;
@@ -88,6 +96,9 @@ namespace WebbShopFront
                 return adminUser;
         }
 
+        /// <summary>
+        /// Meny för användare som har IsAdmin = true.
+        /// </summary>
         public void AdminMenu()
         {
             bool adminMenu = true;
@@ -179,7 +190,7 @@ namespace WebbShopFront
         }
 
         /// <summary>
-        /// Meny för alla användare som har IsAdmin = false (default). Menyn innehåller olika menyalternativ som hä
+        /// Meny för alla användare som har IsAdmin = false (defaultvärdet)
         /// </summary>
         public void UserMenu()
         {

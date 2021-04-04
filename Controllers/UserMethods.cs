@@ -11,6 +11,10 @@ namespace WebbShopFront.Controllers
         /// </summary>
         public string spacing = "                                            ";
         public string spacing2 = "           ";
+
+        /// <summary>
+        /// Denna metod loggar ut användaren.
+        /// </summary>
         public void Logout()
         {
             var menu = new WebbShopFront.Menu();
@@ -35,6 +39,9 @@ namespace WebbShopFront.Controllers
             Console.ReadLine();
         }
 
+        /// <summary>
+        /// Denna metod listar upp alla bokkategorier.
+        /// </summary>
         public void ListCategories()
         {
             var API = new WebbShopAPI.WebbShopAPI();
@@ -47,6 +54,9 @@ namespace WebbShopFront.Controllers
             Console.ReadLine();
         }
 
+        /// <summary>
+        /// Denna metod söker efter en kategori med hjälp av en sökordsparameter.
+        /// </summary>
         public void ListCategoryKeyword()
         {
             Console.Write(spacing + "Name: ");
@@ -61,6 +71,9 @@ namespace WebbShopFront.Controllers
             Console.ReadLine();
         }
 
+        /// <summary>
+        /// Denna metoden söker efter en kategori med hjälp av ID.
+        /// </summary>
         public void ListCategoryID()
         {
             Console.Write(spacing + "ID: ");
@@ -76,6 +89,9 @@ namespace WebbShopFront.Controllers
             Console.ReadLine();
         }
 
+        /// <summary>
+        /// Denna metoden kollar hur många böcker det finns kvar i systemet.
+        /// </summary>
         public void GetAvaibleBooks()
         {
             Console.Write(spacing + "Book ID: ");
@@ -93,6 +109,9 @@ namespace WebbShopFront.Controllers
             Console.ReadLine();
         }
 
+        /// <summary>
+        /// Denna metoden hämtar en bok med hjälp av ID.
+        /// </summary>
         public void GetBook()
         {
             Console.Write(spacing + "ID: ");
@@ -106,6 +125,9 @@ namespace WebbShopFront.Controllers
             Console.ReadLine();
         }
 
+        /// <summary>
+        /// Denna metoden hämtar alla böcker som matchar med sökordsparametern.
+        /// </summary>
         public void GetBooks()
         {
             Console.Write(spacing + "Name: ");
@@ -121,6 +143,9 @@ namespace WebbShopFront.Controllers
             Console.ReadLine();
         }
 
+        /// <summary>
+        /// Denna metod hämtar alla författare som matchar med sökordsparametern.
+        /// </summary>
         public void GetAuthors()
         {
             Console.Write(spacing + "Name: ");
@@ -136,6 +161,9 @@ namespace WebbShopFront.Controllers
             Console.ReadLine();
         }
 
+        /// <summary>
+        /// Denna metoden används för att köpa en bok.
+        /// </summary>
         public void BuyBook()
         {
             var API = new WebbShopAPI.WebbShopAPI();
